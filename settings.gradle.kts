@@ -1,0 +1,1 @@
+rootProject.name = "com.milanradosavac.textpad-sync-server"
