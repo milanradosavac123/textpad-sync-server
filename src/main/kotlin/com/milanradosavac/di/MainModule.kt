@@ -21,7 +21,7 @@ val mainModule = module {
      * @author Milan Radosavac
      */
     single {
-        val client = KMongo.createClient().coroutine
+        val client = KMongo.createClient("mongodb://mongo:27017").coroutine
         client.getDatabase(Constants.DATABASE_NAME)
     }
 

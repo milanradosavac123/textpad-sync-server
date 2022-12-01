@@ -16,5 +16,5 @@ object Constants {
      * The file path constant
      * @author Milan Radosavac
      */
-    const val FILE_PATH = "src/main/resources/static/files/"
+    const val FILE_PATH = "/app/files/"
 }

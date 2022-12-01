@@ -13,7 +13,7 @@ plugins {
 group = "com.milanradosavac"
 version = "0.0.1"
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("com.milanradosavac.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -21,6 +21,12 @@ application {
 
 repositories {
     mavenCentral()
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("textpad-sync-server.jar")
+    }
 }
 
 dependencies {
@@ -35,6 +41,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
 
     // KMongo
     implementation("org.litote.kmongo:kmongo:$kmongo_version")
