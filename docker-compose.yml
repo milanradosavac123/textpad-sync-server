@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    image: masked123/textpad-sync-server:latest
+    image: milanradosavac/textpad-sync-server:latest
     ports:
       - '8080:8080'
     depends_on:
