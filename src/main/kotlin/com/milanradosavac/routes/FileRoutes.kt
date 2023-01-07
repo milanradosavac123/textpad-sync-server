@@ -136,15 +136,18 @@ fun Route.syncUnsyncedFiles(fileRepository: FileRepository) {
 
         val files = arrayListOf<ByteArray>()
         val fileInfo = arrayListOf<String>()
+        val devicesOfOrigin = arrayListOf<String>()
 
         fileRepository.getAllSyncableFiles(request.deviceId).forEach {
             fileInfo.add(it.originalName)
+            devicesOfOrigin.add(it.deviceOfOrigin)
             files.add(java.io.File(it.path).readBytes())
         }
 
         call.respond(HttpStatusCode.OK, FileSyncResponse(
             files = files.toTypedArray(),
-            fileInfo = fileInfo.toTypedArray()
+            originalFileNames = fileInfo.toTypedArray(),
+            devicesOfOrigin = devicesOfOrigin.toTypedArray()
         ))
 
     }
