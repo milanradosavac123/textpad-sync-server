@@ -27,6 +27,8 @@ fun Application.configureRouting() {
 
         startSyncingUnsyncedFiles(fileRepository)
 
+        stopSyncingASyncedFile(fileRepository)
+
         syncUnsyncedFiles(fileRepository)
 
     }

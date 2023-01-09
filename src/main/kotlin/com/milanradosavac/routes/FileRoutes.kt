@@ -123,6 +123,23 @@ fun Route.startSyncingUnsyncedFiles(fileRepository: FileRepository) {
 }
 
 /**
+ * The [File] synchronisation stop route
+ * @param fileRepository The repository for interacting with the [File] info in the database
+ * @author Milan Radosavac
+ */
+fun Route.stopSyncingASyncedFile(fileRepository: FileRepository) {
+    delete("/api/file/sync/stop") {
+        val request = call.receiveNullable<FileSyncRequest>() ?: kotlin.run {
+            call.respond(HttpStatusCode.BadRequest)
+            return@delete
+        }
+
+        fileRepository.removeDeviceSyncedTo(request.deviceId, request.fileId!!)
+        call.respond(HttpStatusCode.OK)
+    }
+}
+
+/**
  * The [File] synchronisation route
  * @param fileRepository The repository for interacting with the [File] info in the database
  * @author Milan Radosavac

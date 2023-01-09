@@ -31,6 +31,14 @@ interface FileRepository {
     suspend fun addDeviceSyncedTo(deviceId: String)
 
     /**
+     * Removes a [Device] id from the [File] (denoted by the [fileId])'s array of devices a particular [File] is synchronised to
+     * @param deviceId The id that is removed
+     * @param fileId The id of the [File] from which the [deviceId] is removed
+     * @author Milan Radosavac
+     */
+    suspend fun removeDeviceSyncedTo(deviceId: String, fileId: String)
+
+    /**
      * Gets a [List] of all the [File]s that are not synchronised
      * to the corresponding [Device] from the database
      * @param deviceId The id of the [Device] the [File]s aren't synchronised to

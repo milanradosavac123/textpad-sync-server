@@ -44,6 +44,21 @@ class FileRepositoryImpl(
 
     }
 
+    override suspend fun removeDeviceSyncedTo(deviceId: String, fileId: String) {
+
+        files.find().toList().forEach {
+            if(it.deviceOfOrigin != deviceId && it.id == fileId) {
+                files.updateOneById(
+                    id = it.id,
+                    update = it.copy(
+                        devicesSyncedTo = it.devicesSyncedTo.filter { id -> id != deviceId }.toTypedArray()
+                    )
+                )
+            }
+        }
+
+    }
+
     override suspend fun getAllSyncableFiles(deviceId: String): List<File> {
         return files.find().toList().filter { it.devicesSyncedTo.contains(deviceId) }
     }
